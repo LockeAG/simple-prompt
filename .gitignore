@@ -1,0 +1,155 @@
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+*.pid
+*.seed
+*.pid.lock
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.eggs/
+env/
+venv/
+.Python
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Vim
+*.un~
+*.sw[a-p]
+
+# Zsh
+.zcompdump
+.zsh_history
+
+# Bash
+.bash_history
+.bash_sessions
+
+# VSCode
+.vscode/
+*.code-workspace
+.vscode/*.{code-workspace,config}
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea/*
+
+# Temporary files
+*.bak
+*.backup
+*.tmp
+*.temp
+*.out
+
+# OS files
+.DS_Store
+.Trash-*
+
+# Backup files
+*.bak
+*.orig
+*.old
+
+# Compiled source files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyc
+
+# Environment variables
+.env
+.env.*.local
+
+# Lock files
+package-lock.json
+yarn.lock
+pipfile.lock
+pnpm-lock.yaml
+
+# Editor backups
+*.orig
+*.rej
+*~ 
+*.swp 
+*.swo
+
+# Coverage reports
+coverage/
+.nyc_output/
+coverage-final.json
+
+# Dependency directories
+node_modules/
+jspm_packages/
+bower_components/
+
+# Production build
+/dist/
+/build/
+
+# IDE specific files
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Docker files
+.dockerignore
+Dockerfile
+
+# Miscellaneous
+*~
+*.db
+*.sqlite3
+*.h5
+
+# Local Environment
+.envrc
+direnv
+
+# Python virtual environments
+venv/
+.venv/
+ENV/
+env.bak/
+env/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Ruby
+.bundle/
+log/
+tmp/
+
+# Go
+*.​⬤
