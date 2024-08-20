@@ -52,7 +52,3 @@ source ~/.zshrc
 1. Deploy the configuration files to your remote server by copying them to your home directory.
 2. Apply the changes by reloading the shell configuration.
 3. Enjoy a clean and consistent environment across all your remote servers.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
