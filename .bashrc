@@ -25,9 +25,11 @@ export TERM=xterm
 # Set the default editor to Vim
 export EDITOR=vim
 
-# Enable history search with arrow keys
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
+# Enable history search with arrow keys only in interactive shells
+if [[ $- == *i* ]]; then
+    bind '"\e[A": history-search-backward'
+    bind '"\e[B": history-search-forward'
+fi
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
