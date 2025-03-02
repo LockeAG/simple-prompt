@@ -1,4 +1,46 @@
-# Enable color support for ls and add handy aliases
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# Merged version: Ubuntu defaults + customizations including sudo shortcut and optional nvim settings
+
+# Exit if not running interactively.
+case $- in
+*i*) ;;
+*) return ;;
+esac
+
+# ------------------------------
+# History and Terminal Settings
+# ------------------------------
+export HISTCONTROL=ignoredups:erasedups
+shopt -s histappend
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+shopt -s checkwinsize
+shopt -s nocaseglob
+
+# ------------------------------
+# PATH and Editor Settings
+# ------------------------------
+export PATH="$HOME/bin:$PATH"
+# export EDITOR=vim   # Use vim by default. Uncomment the following line if you want nvim.
+export EDITOR=nvim
+
+export TERM=xterm
+
+# ------------------------------
+# Directory and Less Settings
+# ------------------------------
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# ------------------------------
+# chroot Check (Ubuntu Default)
+# ------------------------------
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+  debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# ------------------------------
+# Color Support and Aliases
+# ------------------------------
 if [ -x /usr/bin/dircolors ]; then
   eval "$(dircolors -b)"
   alias ls='ls --color=auto'
@@ -7,57 +49,56 @@ if [ -x /usr/bin/dircolors ]; then
   alias egrep='egrep --color=auto'
 fi
 
-# Aliases for common commands
+# Common aliases.
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias g='git'
-alias v='vim'
+# Optional: Use Neovim instead of Vim.
+alias vim='nvim'
 
-# Customize the command prompt (PS1) with Tokyo Night Storm theme colors and a bolder >
-PS1='\n\[\e[38;5;110m\]\u@\h:\[\e[38;5;141m\] \w\[\e[0m\]\n\[\e[1;38;5;220m\]>\[\e[0m\] '
+# Sudo shortcut alias.
+alias _='sudo'
 
-# Set the terminal type to xterm
-export TERM=xterm
-
-# Set the default editor to Vim
-export EDITOR=vim
-
-# Enable history search with arrow keys only in interactive shells
-if [[ $- == *i* ]]; then
-    bind '"\e[A": history-search-backward'
-    bind '"\e[B": history-search-forward'
-fi
-
-# Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob
-
-# Check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# Avoid duplicates in history
-export HISTCONTROL=ignoredups:erasedups
-
-# Append to the history file, rather than overwriting it
-shopt -s histappend
-
-# Set a larger history size
-export HISTSIZE=10000
-export HISTFILESIZE=20000
-
-# Use Vim mode in Bash
-set -o vi
-
-# Enable auto-correction for typos in directory names
-shopt -s dirspell
-
-# Alias for opening .bashrc
+# Aliases for quickly editing and reloading .bashrc.
 alias bashrc='vim ~/.bashrc'
-
-# Source .bashrc to apply changes immediately
 alias reload='source ~/.bashrc'
 
-# Add paths to PATH variable (adjust according to your needs)
-export PATH="$HOME/bin:$PATH"
+# Alert alias for long-running commands.
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history | tail -n1 | sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# ------------------------------
+# Prompt Customization
+# ------------------------------
+PS1='\n\[\e[38;5;110m\]\u@\h:\[\e[38;5;141m\] \w\[\e[0m\]\n\[\e[1;38;5;220m\]>\[\e[0m\] '
+case "$TERM" in
+xterm* | rxvt*)
+  PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+  ;;
+*) ;;
+esac
+
+# ------------------------------
+# Advanced Shell Options
+# ------------------------------
+set -o vi
+shopt -s dirspell
+
+# ------------------------------
+# Programmable Completion (Ubuntu Default)
+# ------------------------------
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# ------------------------------
+# History Search with Arrow Keys (Custom)
+# ------------------------------
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
